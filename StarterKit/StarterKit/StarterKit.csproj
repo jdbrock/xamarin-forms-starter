@@ -42,7 +42,7 @@
     <Compile Include="Platform\Secrets\Secrets.cs" />
     <Compile Include="Platform\ViewModels\IViewModel.cs" />
     <Compile Include="Platform\ViewModels\ViewModelBase.cs" />
-    <Compile Include="Platform\Views\ViewPage.cs" />
+    <Compile Include="Platform\Views\ViewPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\Services\INavigationService.cs" />
     <Compile Include="Platform\Services\IViewService.cs" />
