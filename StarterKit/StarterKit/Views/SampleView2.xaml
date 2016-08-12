@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:SampleViewBase2 xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:v="clr-namespace:StarterKit.Views"
+    x:Class="StarterKit.Views.SampleView2"
+    Title="StarterKit">
+
+  <Label Text="{Binding Greeting}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+</v:SampleViewBase2>

@@ -43,7 +43,9 @@ namespace StarterKit
         {
             // You can add your own app services, view models & view registrations here.
             builder.RegisterType<SampleViewModel>();
+            builder.RegisterType<SampleViewModel2>();
             builder.RegisterType<SampleView>();
+            builder.RegisterType<SampleView2>();
         }
 
         private static void RegisterViews(IContainer container)
@@ -52,6 +54,7 @@ namespace StarterKit
 
             // You can add your view model -> registrations here.
             viewService.Register<SampleViewModel, SampleView>();
+            viewService.Register<SampleViewModel2, SampleView2>();
         }
 
         private static void ShowView<T>(IContainer container, App app)
@@ -59,8 +62,9 @@ namespace StarterKit
         {
             var viewService = container.Resolve<IViewService>();
             var view = viewService.Resolve<T>();
+            var nav = new NavigationPage(view);
 
-            app.MainPage = view;
+            app.MainPage = nav;
         }
     }
 }

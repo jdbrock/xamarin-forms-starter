@@ -20,12 +20,13 @@ namespace StarterKit.Droid
 
             base.OnCreate(bundle);
 
+            global::Xamarin.Forms.Forms.Init(this, bundle);
+
             var app = new App();
 
             if (!String.IsNullOrWhiteSpace(App.Secrets.HockeyAppId))
                 CrashManager.Register(this, App.Secrets.HockeyAppId);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(app);
         }
     }

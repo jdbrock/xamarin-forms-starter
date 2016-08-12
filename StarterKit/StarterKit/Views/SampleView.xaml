@@ -5,6 +5,8 @@
     x:Class="StarterKit.Views.SampleView"
     Title="StarterKit">
 
-  <Label Text="{Binding Greeting}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+    <Button Command="{Binding DoSomethingCommand}" Text="Do Something!" />
+  </StackLayout>
 
 </v:SampleViewBase>
