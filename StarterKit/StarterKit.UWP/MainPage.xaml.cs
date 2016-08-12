@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.HockeyApp;
 
 namespace StarterKit.UWP
 {
@@ -21,7 +22,12 @@ namespace StarterKit.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new StarterKit.App());
+            var app = new StarterKit.App();
+
+            if (!String.IsNullOrWhiteSpace(StarterKit.App.Secrets.HockeyAppId))
+                Microsoft.HockeyApp.HockeyClient.Current.Configure(StarterKit.App.Secrets.HockeyAppId);
+
+            LoadApplication(app);
         }
     }
 }

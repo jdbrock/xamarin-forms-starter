@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using HockeyApp.iOS;
 
 namespace StarterKit.iOS
 {
@@ -20,12 +21,32 @@ namespace StarterKit.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApp, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
 
-            return base.FinishedLaunching(app, options);
+            // Create app.
+            var app = new App();
+
+            // Start HockeyApp manager.
+            InitializeHockeyApp();
+
+            // Load our app.
+            LoadApplication(app);
+
+            return base.FinishedLaunching(uiApp, options);
+        }
+
+        private void InitializeHockeyApp()
+        {
+            if (String.IsNullOrWhiteSpace(App.Secrets.HockeyAppId))
+                return;
+
+            var hockeyManager = BITHockeyManager.SharedHockeyManager;
+
+            hockeyManager.Configure(App.Secrets.HockeyAppId);
+            hockeyManager.DebugLogEnabled = true;
+            hockeyManager.StartManager();
         }
     }
 }

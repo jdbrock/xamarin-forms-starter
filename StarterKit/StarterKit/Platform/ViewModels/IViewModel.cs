@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace StarterKit
 {
-    public partial class MainPage : ContentPage
+    public interface IViewModel
     {
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+        event EventHandler StateChanged;
+        void SetState<T>(Action<T> action) where T : class, IViewModel;
     }
 }

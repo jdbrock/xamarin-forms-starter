@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using HockeyApp.Android;
 
 namespace StarterKit.Droid
 {
@@ -19,8 +20,13 @@ namespace StarterKit.Droid
 
             base.OnCreate(bundle);
 
+            var app = new App();
+
+            if (!String.IsNullOrWhiteSpace(App.Secrets.HockeyAppId))
+                CrashManager.Register(this, App.Secrets.HockeyAppId);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+            LoadApplication(app);
         }
     }
 }
