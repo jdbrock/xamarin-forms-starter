@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<v:SampleViewBase xmlns="http://xamarin.com/schemas/2014/forms"
+<v:ViewBase xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:v="clr-namespace:StarterKit.Views"
+    xmlns:vm="clr-namespace:StarterKit.ViewModels"
     x:Class="StarterKit.Views.SampleView"
+    x:TypeArguments="vm:SampleViewModel"
     Title="StarterKit">
 
-  <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
-    <Button Command="{Binding DoSomethingCommand}" Text="Do Something!" />
-  </StackLayout>
+    <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+      <Button Command="{Binding DoSomethingCommand}" Text="Do Something!" />
+    </StackLayout>
 
-</v:SampleViewBase>
+</v:ViewBase>

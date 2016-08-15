@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using StarterKit.Services;
 using StarterKit.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using Xamarin.Forms;
 
 namespace StarterKit.Views
 {
-    public partial class SampleView : ViewBase<SampleViewModel>
+    // NB. Workaround for specifying generic base classes in XAML.
+    public partial class SampleTabView : TabViewBase<SampleTabViewModel>
     {
-        public override bool WrapWithNavigationPage => true;
-
-        public SampleView()
+        public SampleTabView(IViewService viewService)
+            : base(viewService)
         {
             InitializeComponent();
         }

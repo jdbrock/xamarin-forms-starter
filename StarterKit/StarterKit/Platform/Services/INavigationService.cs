@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace StarterKit.Services
 {
@@ -14,16 +15,20 @@ namespace StarterKit.Services
 
         Task PopToRootAsync();
 
-        Task<TViewModel> PushAsync<TViewModel>(Action<TViewModel> setStateAction = null)
+        Task<TViewModel> PushAsync<TViewModel>(Action<TViewModel> setStateAction = null, bool scopeNavigation = true)
             where TViewModel : class, IViewModel;
 
-        Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel)
+        Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel, bool scopeNavigation = true)
             where TViewModel : class, IViewModel;
 
-        Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> setStateAction = null)
+        Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> setStateAction = null, bool scopeNavigation = true)
             where TViewModel : class, IViewModel;
 
-        Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel)
+        Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel, bool scopeNavigation = true)
             where TViewModel : class, IViewModel;
+
+        void SetRootNavigationContext(Func<INavigation> context);
+
+        void SetScopedNavigationContext(Func<INavigation> context);
     }
 }

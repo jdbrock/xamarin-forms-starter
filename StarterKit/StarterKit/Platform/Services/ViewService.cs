@@ -21,39 +21,60 @@ namespace StarterKit.Services
 
         public void Register<TViewModel, TView>()
             where TViewModel : class, IViewModel
-            where TView : Page
+            where TView : IView
         {
             _map[typeof(TViewModel)] = typeof(TView);
         }
 
-        public ViewPageBase<TViewModel> Resolve<TViewModel>(Action<TViewModel> setStateAction = null) where TViewModel : class, IViewModel
+        public Page Resolve<TViewModel>(Action<TViewModel> setStateAction = null) where TViewModel : class, IViewModel
         {
             TViewModel viewModel;
             return Resolve<TViewModel>(out viewModel, setStateAction);
         }
 
-        public ViewPageBase<TViewModel> Resolve<TViewModel>(out TViewModel viewModel, Action<TViewModel> setStateAction = null)
+        public Page Resolve<TViewModel>(out TViewModel viewModel, Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel
         {
             viewModel = _componentContext.Resolve<TViewModel>();
 
             var viewType = _map[typeof(TViewModel)];
-            var view = _componentContext.Resolve(viewType) as ViewPageBase<TViewModel>;
+            var view = _componentContext.Resolve(viewType) as IView<TViewModel>;
 
             if (setStateAction != null)
                 viewModel.SetState(setStateAction);
 
             view.ViewModel = viewModel;
-            return view;
+
+            if (view.WrapWithNavigationPage)
+                return new NavigationPage((Page)view);
+
+            return (Page)view;
         }
 
-        public ViewPageBase<TViewModel> Resolve<TViewModel>(TViewModel viewModel)
+        public Page Resolve<TViewModel>(TViewModel viewModel)
             where TViewModel : class, IViewModel
         {
             var viewType = _map[typeof(TViewModel)];
-            var view = _componentContext.Resolve(viewType) as ViewPageBase<TViewModel>;
+            var view = _componentContext.Resolve(viewType) as IView<TViewModel>;
             view.ViewModel = viewModel;
-            return view;
+
+            if (view.WrapWithNavigationPage)
+                return new NavigationPage((Page)view);
+
+            return (Page)view;
+        }
+
+        public Page Resolve(object viewModel, Type type)
+        {
+            var viewType = _map[type];
+            var view = _componentContext.Resolve(viewType) as IView;
+
+            view.ViewModel = viewModel;
+
+            if (view.WrapWithNavigationPage)
+                return new NavigationPage((Page)view);
+
+            return (Page)view;
         }
     }
 }

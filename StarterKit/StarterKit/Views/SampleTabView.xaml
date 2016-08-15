@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<v:TabViewBase xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:v="clr-namespace:StarterKit.Views"
+    xmlns:vm="clr-namespace:StarterKit.ViewModels"
+    x:Class="StarterKit.Views.SampleTabView"
+    x:TypeArguments="vm:SampleTabViewModel"
+    Title="StarterKit">
+
+</v:TabViewBase>

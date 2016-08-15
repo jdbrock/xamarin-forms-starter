@@ -10,9 +10,7 @@ using Xamarin.Forms;
 
 namespace StarterKit.Views
 {
-    // NB. Workaround for specifying generic base classes in XAML.
-    public class SampleViewBase2 : ViewPageBase<SampleViewModel2> { }
-    public partial class SampleView2 : SampleViewBase2
+    public partial class SampleView2 : ViewBase<SampleViewModel2>
     {
         public SampleView2()
         {

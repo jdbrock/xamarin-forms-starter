@@ -12,15 +12,17 @@ namespace StarterKit.Services
     {
         void Register<TViewModel, TView>()
             where TViewModel : class, IViewModel
-            where TView : Page;
+            where TView : IView;
 
-        ViewPageBase<TViewModel> Resolve<TViewModel>(Action<TViewModel> setStateAction = null)
+        Page Resolve<TViewModel>(Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel;
 
-        ViewPageBase<TViewModel> Resolve<TViewModel>(out TViewModel viewModel, Action<TViewModel> setStateAction = null)
+        Page Resolve<TViewModel>(out TViewModel viewModel, Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel;
 
-        ViewPageBase<TViewModel> Resolve<TViewModel>(TViewModel viewModel)
+        Page Resolve<TViewModel>(TViewModel viewModel)
             where TViewModel : class, IViewModel;
+
+        Page Resolve(object viewModel, Type type);
     }
 }

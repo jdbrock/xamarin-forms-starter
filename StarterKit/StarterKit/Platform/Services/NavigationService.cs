@@ -9,69 +9,72 @@ namespace StarterKit.Services
 {
     public class NavigationService : INavigationService
     {
-        private readonly Lazy<INavigation> _navigation;
+        private Func<INavigation> _scopedNavigation;
+        private Func<INavigation> _rootNavigation;
+
         private readonly IViewService _viewService;
 
-        public NavigationService(Lazy<INavigation> navigation, IViewService viewService)
+        public NavigationService(IViewService viewService)
         {
-            _navigation = navigation;
             _viewService = viewService;
         }
 
-        private INavigation Navigation
-        {
-            get { return _navigation.Value; }
-        }
+        private INavigation GetNavigation(bool scopeNavigation = true) =>
+            (scopeNavigation ? _scopedNavigation ?? _rootNavigation : _rootNavigation)();
 
         public async Task<IViewModel> PopAsync()
         {
-            Page view = await Navigation.PopAsync();
+            Page view = await GetNavigation().PopAsync();
             return view.BindingContext as IViewModel;
         }
 
         public async Task<IViewModel> PopModalAsync()
         {
-            Page view = await Navigation.PopAsync();
+            Page view = await GetNavigation().PopAsync();
             return view.BindingContext as IViewModel;
         }
 
         public async Task PopToRootAsync()
         {
-            await Navigation.PopToRootAsync();
+            await GetNavigation().PopToRootAsync();
         }
 
-        public async Task<TViewModel> PushAsync<TViewModel>(Action<TViewModel> setStateAction = null)
+        public async Task<TViewModel> PushAsync<TViewModel>(Action<TViewModel> setStateAction = null, bool scopeNavigation = true)
             where TViewModel : class, IViewModel
         {
             TViewModel viewModel;
-            var view = _viewService.Resolve<TViewModel>(out viewModel, setStateAction);
-            await Navigation.PushAsync(view);
+            var view = (Page)_viewService.Resolve<TViewModel>(out viewModel, setStateAction);
+            await GetNavigation(scopeNavigation).PushAsync(view);
             return viewModel;
         }
 
-        public async Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel)
+        public async Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel, bool scopeNavigation = true)
             where TViewModel : class, IViewModel
         {
-            var view = _viewService.Resolve(viewModel);
-            await Navigation.PushAsync(view);
+            var view = (Page)_viewService.Resolve(viewModel);
+            await GetNavigation(scopeNavigation).PushAsync(view);
             return viewModel;
         }
 
-        public async Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> setStateAction = null)
+        public async Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> setStateAction = null, bool scopeNavigation = true)
             where TViewModel : class, IViewModel
         {
             TViewModel viewModel;
-            var view = _viewService.Resolve<TViewModel>(out viewModel, setStateAction);
-            await Navigation.PushModalAsync(view);
+            var view = (Page)_viewService.Resolve<TViewModel>(out viewModel, setStateAction);
+            await GetNavigation(scopeNavigation).PushModalAsync(view);
             return viewModel;
         }
 
-        public async Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel)
+        public async Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel, bool scopeNavigation = true)
             where TViewModel : class, IViewModel
         {
-            var view = _viewService.Resolve(viewModel);
-            await Navigation.PushModalAsync(view);
+            var view = (Page)_viewService.Resolve(viewModel);
+            await GetNavigation(scopeNavigation).PushModalAsync(view);
             return viewModel;
         }
+
+        public void SetRootNavigationContext(Func<INavigation> context) => _rootNavigation = context;
+
+        public void SetScopedNavigationContext(Func<INavigation> context) => _scopedNavigation = context;
     }
 }

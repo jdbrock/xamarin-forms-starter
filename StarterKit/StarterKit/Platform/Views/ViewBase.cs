@@ -9,7 +9,8 @@ using Xamarin.Forms;
 
 namespace StarterKit.Views
 {
-    public abstract class ViewPageBase<T> : ContentPage where T : IViewModel
+    public abstract class ViewBase<T> : ContentPage, IView<T>
+        where T : IViewModel
     {
         private T _viewModel;
         public T ViewModel
@@ -17,6 +18,8 @@ namespace StarterKit.Views
             get { return _viewModel; }
             set { var oldViewModel = _viewModel; _viewModel = value; BindingContext = _viewModel; OnViewModelReplaced(oldViewModel, _viewModel); }
         }
+
+        object IView.ViewModel { get { return ViewModel; } set { ViewModel = (T)value; } }
 
         public virtual void OnViewModelReplaced(IViewModel oldViewModel, IViewModel newViewModel)
         {
@@ -30,5 +33,7 @@ namespace StarterKit.Views
         }
 
         public virtual void OnViewModelRefreshed(object sender, EventArgs args) { }
+
+        public virtual bool WrapWithNavigationPage { get; } = false;
     }
 }
