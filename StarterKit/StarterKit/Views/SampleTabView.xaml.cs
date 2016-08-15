@@ -11,7 +11,6 @@ using Xamarin.Forms;
 
 namespace StarterKit.Views
 {
-    // NB. Workaround for specifying generic base classes in XAML.
     public partial class SampleTabView : TabViewBase<SampleTabViewModel>
     {
         public SampleTabView(IViewService viewService)
