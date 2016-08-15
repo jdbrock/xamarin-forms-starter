@@ -42,3 +42,7 @@ There's a PS script included that'll find/replace/rename everything to your chos
 3. Optionally populate the HockeyAppId entry in config.secrets.
 4. Add items to the Views and ViewModels directories and register them in Bootstrap.cs.
 5. F5
+
+# Screenshots
+
+![screenshot](http://i.imgur.com/b4CiNN1.png)
