@@ -46,7 +46,7 @@ namespace StarterKit.Services
             view.ViewModel = viewModel;
 
             if (view.WrapWithNavigationPage)
-                return new NavigationPage((Page)view);
+                return WrapWithNavigationPage((Page)view);
 
             return (Page)view;
         }
@@ -59,7 +59,7 @@ namespace StarterKit.Services
             view.ViewModel = viewModel;
 
             if (view.WrapWithNavigationPage)
-                return new NavigationPage((Page)view);
+                return WrapWithNavigationPage((Page)view);
 
             return (Page)view;
         }
@@ -72,9 +72,19 @@ namespace StarterKit.Services
             view.ViewModel = viewModel;
 
             if (view.WrapWithNavigationPage)
-                return new NavigationPage((Page)view);
+                return WrapWithNavigationPage((Page)view);
 
             return (Page)view;
+        }
+
+        private NavigationPage WrapWithNavigationPage(Page child)
+        {
+            var nav = new NavigationPage(child);
+
+            nav.SetBinding(NavigationPage.IconProperty, new Binding(nameof(Page.Icon), source: child));
+            nav.SetBinding(NavigationPage.TitleProperty, new Binding(nameof(Page.Title), source: child));
+
+            return nav;
         }
     }
 }
