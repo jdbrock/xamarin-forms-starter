@@ -98,7 +98,7 @@ namespace StarterKit
         // ===========================================================================
         // = Application Startup
         // ===========================================================================
-        
+
         private static void ShowMainView<T>(IContainer container, App app)
             where T : class, IViewModel
         {
@@ -114,6 +114,10 @@ namespace StarterKit
             {
                 app.MainPage = view;
             }
+            else if (view is MasterDetailPage)
+            {
+                app.MainPage = view;
+            }
             else if (view is ContentPage)
             {
                 var nav = new NavigationPage(view);
@@ -126,7 +130,7 @@ namespace StarterKit
         // ===========================================================================
         // = Navigation Context
         // ===========================================================================
-        
+
         private static void SetupNavigationContext(IContainer container)
         {
             var navigationService = container.Resolve<INavigationService>();
@@ -139,11 +143,14 @@ namespace StarterKit
         {
             var mainPage = App.Current.MainPage;
 
+            if (mainPage is MasterDetailPage)
+                mainPage = ((MasterDetailPage)mainPage).Detail;
+
             // Main page is a TabbedPage (not wrapped in a NavigationPage).
             if (mainPage is TabbedPage)
             {
                 var selectedTabNav = TryGetSelectedTabNavigation((TabbedPage)mainPage);
-                return selectedTabNav;
+                return selectedTabNav ?? mainPage.Navigation;
             }
 
             // Main page is a NavigationPage.
@@ -157,11 +164,14 @@ namespace StarterKit
         {
             var mainPage = App.Current.MainPage;
 
+            if (mainPage is MasterDetailPage)
+                mainPage = ((MasterDetailPage)mainPage).Detail;
+
             // Main page is a TabbedPage (not wrapped in a NavigationPage).
             if (mainPage is TabbedPage)
             {
                 var selectedTabNav = TryGetSelectedTabNavigation((TabbedPage)mainPage);
-                return selectedTabNav;
+                return selectedTabNav ?? mainPage.Navigation;
             }
 
             // Main page is a NavigationPage.
