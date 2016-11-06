@@ -14,9 +14,29 @@ namespace StarterKit
     public static class Bootstrap
     {
         // ===========================================================================
+        // = Public Properties
+        // ===========================================================================
+
+        /// <summary>
+        /// Root container for Autofac resolution.
+        /// 
+        /// You should absolutely not use this in your views or view models, you
+        /// should instead take your dependencies in via constructor arguments.
+        /// 
+        /// This only exists for weird cases like when you're stuck in platform code.
+        /// </summary>
+        public static IContainer RootContainer { get; private set; }
+
+        // ===========================================================================
+        // = Private Fields
+        // ===========================================================================
+
+        private static IPlatformRegistration _platformRegistration;
+
+        // ===========================================================================
         // = Initialization
         // ===========================================================================
-        
+
         public static void Run(App app)
         {
             // Register platform services.
@@ -28,6 +48,7 @@ namespace StarterKit
 
             // Realise container.
             var container = builder.Build();
+            RootContainer = container;
 
             // Register views.
             RegisterViews(container);
@@ -42,7 +63,10 @@ namespace StarterKit
         // ===========================================================================
         // = Registration
         // ===========================================================================
-        
+
+        public static void SetPlatformRegistration(IPlatformRegistration platformRegistration)
+            => _platformRegistration = platformRegistration;
+
         private static void RegisterPlatform(ContainerBuilder builder)
         {
             builder.RegisterType<ViewService>().As<IViewService>().SingleInstance();

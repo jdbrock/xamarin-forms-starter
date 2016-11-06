@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MaterialDesignColors;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +21,7 @@ namespace StarterKit
         {
             InitializeComponent();
 
+            MaterialColors.Initialize(MaterialColors.Blue, MaterialColors.LightBlue);
             Secrets = ReadSecrets();
 
             Bootstrap.Run(this);

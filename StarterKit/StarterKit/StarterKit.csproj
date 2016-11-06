@@ -39,12 +39,21 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="Platform\KeyboardResizeMode.cs" />
     <Compile Include="Platform\Secrets\Secrets.cs" />
+    <Compile Include="Platform\Services\IKeyboardService.cs" />
+    <Compile Include="Platform\Services\IMessageService.cs" />
+    <Compile Include="Platform\Services\IOrientationService.cs" />
+    <Compile Include="Platform\Services\IPlatformRegistration.cs" />
+    <Compile Include="Platform\ViewModels\IViewModelWithMasterDetail.cs" />
     <Compile Include="Platform\ViewModels\IViewModelWithTabs.cs" />
     <Compile Include="Platform\ViewModels\IViewModel.cs" />
+    <Compile Include="Platform\ViewModels\MasterDetailViewModelBase.cs" />
     <Compile Include="Platform\ViewModels\TabViewModelBase.cs" />
     <Compile Include="Platform\ViewModels\ViewModelBase.cs" />
+    <Compile Include="Platform\Views\ContentPageEx.cs" />
     <Compile Include="Platform\Views\IView.cs" />
+    <Compile Include="Platform\Views\MasterDetailViewBase.cs" />
     <Compile Include="Platform\Views\TabViewBase.cs" />
     <Compile Include="Platform\Views\ViewBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,6 +101,10 @@
     </Reference>
     <Reference Include="crypto, Version=1.7.0.0, Culture=neutral, PublicKeyToken=52d7d8cd84e8295f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Portable.BouncyCastle-Signed.1.7.0.2\lib\portable-net45+dnxcore50+wp80+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MaterialColorsXF.1.0.0\lib\portable-net45+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

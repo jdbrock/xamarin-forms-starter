@@ -90,6 +90,8 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\AppleOrientationService.cs" />
+    <Compile Include="Services\ApplePlatformRegistration.cs" />
     <None Include="app.config" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
@@ -129,11 +131,19 @@
       <HintPath>..\..\packages\Acr.UserDialogs.6.1.2\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HockeySDK">
       <HintPath>..\..\Components\hockeyappios-4.1.0.2\lib\ios-unified\HockeySDK.dll</HintPath>
     </Reference>
     <Reference Include="HockeySDK.iOSBindings">
       <HintPath>..\..\Components\hockeyappios-4.1.0.2\lib\ios-unified\HockeySDK.iOSBindings.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MaterialColorsXF.1.0.0\lib\portable-net45+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -195,6 +205,7 @@
       <Version>4.1.0.2</Version>
     </XamarinComponentReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

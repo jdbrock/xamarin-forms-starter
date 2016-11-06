@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using PropertyChanged;
 using StarterKit.Services;
+using StarterKit.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,5 +65,7 @@ namespace StarterKit.Views
         public virtual void OnViewModelRefreshed(object sender, EventArgs args) { }
 
         public virtual bool WrapWithNavigationPage { get; } = false;
+
+        public virtual KeyboardResizeMode KeyboardResizeMode { get; } = KeyboardResizeMode.None;
     }
 }

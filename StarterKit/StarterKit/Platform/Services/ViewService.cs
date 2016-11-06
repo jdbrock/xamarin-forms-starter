@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Autofac;
 using StarterKit.Views;
+using MaterialDesignColors;
+using StarterKit.ViewModels;
 
 namespace StarterKit.Services
 {
@@ -81,8 +83,11 @@ namespace StarterKit.Services
         {
             var nav = new NavigationPage(child);
 
-            nav.SetBinding(NavigationPage.IconProperty, new Binding(nameof(Page.Icon), source: child));
+            nav.SetBinding(NavigationPage.IconProperty,  new Binding(nameof(Page.Icon),  source: child));
             nav.SetBinding(NavigationPage.TitleProperty, new Binding(nameof(Page.Title), source: child));
+
+            nav.BarTextColor       = MaterialColors.PrimaryHueMidForeground;
+            nav.BarBackgroundColor = MaterialColors.PrimaryHueMid;
 
             return nav;
         }

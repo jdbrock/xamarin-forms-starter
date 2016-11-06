@@ -9,6 +9,7 @@ namespace StarterKit.Views
     public interface IView
     {
         bool WrapWithNavigationPage { get; }
+        KeyboardResizeMode KeyboardResizeMode { get; }
         object ViewModel { get; set; }
     }
 

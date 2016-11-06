@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using StarterKit.ViewModels;
 
 namespace StarterKit.Views
 {
-    public abstract class ViewBase<T> : ContentPage, IView<T>
+    public abstract class ViewBase<T> : ContentPageEx, IView<T>
         where T : IViewModel
     {
         private T _viewModel;
@@ -35,5 +36,7 @@ namespace StarterKit.Views
         public virtual void OnViewModelRefreshed(object sender, EventArgs args) { }
 
         public virtual bool WrapWithNavigationPage { get; } = false;
+
+        public virtual KeyboardResizeMode KeyboardResizeMode { get; } = KeyboardResizeMode.None;
     }
 }
